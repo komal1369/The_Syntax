@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syntax | C++ Language Deep Dive</title>
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --dark-navy: #2C3E50; 
+            --light-green: #4CAF50; 
+            --white-text: #FFFFFF;
+            --text-muted: #B0BEC5;
+            --card-bg: #37474F; 
+            --code-bg: #1e272e;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-navy);
+            color: var(--white-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* 1. Header/Navigation Bar Styling */
+        header {
+            background-color: var(--dark-navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--white-text);
+            margin-right: 30px;
+        }
+
+        .links a {
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 0 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+        
+        /* Highlight C++ language link (2nd link) */
+        .links a:nth-child(2) { 
+            color: var(--light-green);
+            font-weight: bold;
+            opacity: 1;
+        }
+
+        .actions a { color: var(--white-text); text-decoration: none; margin-left: 10px; }
+        .btn-certified { background-color: var(--light-green); padding: 8px 15px; border-radius: 5px; font-weight: bold; }
+
+        /* 2. C++ Language Page Content - Styling Main Sections */
+        .cpp-page-content {
+            flex-grow: 1;
+            padding: 0px 100px 50px;
+            text-align: center;
+        }
+
+        /* Essential C++ Topics (Grid/Navigation) */
+        .topics-section {
+            padding: 40px 0;
+        }
+        
+        .topics-section h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .topics-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .topics-list a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .topics-list li {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-left: 4px solid var(--light-green);
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .topics-list li:hover {
+            background-color: #3E5160; 
+            transform: translateY(-3px);
+        }
+
+        /* Tutorial Content Styles */
+        .tutorial-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding-top: 50px;
+            margin-top: -50px;
+        }
+        
+        .topic-section {
+            margin-bottom: 80px;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-section h2 {
+            font-size: 2.2em;
+            color: var(--light-green);
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            text-align: left;
+        }
+
+        .topic-section h3 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--white-text);
+        }
+
+        .topic-section p, .topic-section ul {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .topic-section ul {
+            margin-left: 20px;
+        }
+
+        /* Code Block Styling */
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            color: #f1c40f; 
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1em;
+            white-space: pre;
+        }
+        
+        /* Image/Diagram Placeholder Styling */
+        .diagram-placeholder {
+            background-color: #1a242c;
+            border: 1px dashed var(--light-green);
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            color: var(--text-muted);
+            font-style: italic;
+            border-radius: 4px;
+        }
+        
+        /* Utility */
+        .highlight {
+            color: var(--light-green);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">The Syntax</div>
+            <nav class="links">
+                <a href="c.html">C</a>
+                <a href="cplus.html">C++</a>
+                <a href="java.html">JAVA</a>
+                <a href="python.html">PYTHON</a>
+                <a href="csharp.html">C#</a>
+                <a href="js.html">JAVASCRIPT</a>
+                <a href="php.html">PHP</a>
+                <a href="mysql.html">MYSQL</a>
+            </nav>
+            <div class="actions">
+                <a href="#" class="log-in-link">Log In</a>
+                <a href="#" class="btn-certified">Get Certified</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="cpp-page-content">
+        
+        <!-- <section class="hero-section" style="padding-top: 50px;">
+            <a href="#tutorial-start" class="btn-start">Start the C++ Course Now</a>
+        </section> -->
+
+        <section class="topics-section" id="tutorial-start">
+            <h2>Essential C++ Topics</h2>
+            <ul class="topics-list">
+                <a href="#topic-io"><li>I/O Streams & Namespaces</li></a>
+                <a href="#topic-classes"><li>Classes and Objects (OOP)</li></a>
+                <a href="#topic-constructors"><li>Constructors and Destructors</li></a>
+                <a href="#topic-encapsulation"><li>Encapsulation and Access Modifiers</li></a>
+                <a href="#topic-inheritance"><li>Inheritance and Polymorphism</li></a>
+                <a href="#topic-templates"><li>Templates and Generics</li></a>
+                <a href="#topic-stl"><li>The Standard Template Library (STL)</li></a>
+                <a href="#topic-memory"><li>Pointers and Smart Pointers</li></a>
+            </ul>
+        </section>
+
+        <hr style="border-color: rgba(255, 255, 255, 0.1); margin: 40px 0;">
+
+        <div class="tutorial-content">
+
+            <section class="topic-section" id="topic-io">
+                <h2>1. I/O Streams & Namespaces 📥</h2>
+                <p>C++ introduces a streamlined, type-safe way to handle input/output using **streams**, replacing C's `printf`/`scanf` functions.</p>
+                
+                <h3>Standard I/O</h3>
+                <ul>
+                    <li><span class="highlight">cout</span>: Standard output stream (replaces `printf`).</li>
+                    <li><span class="highlight">cin</span>: Standard input stream (replaces `scanf`).</li>
+                </ul>
+
+                <h3>Example: Basic I/O</h3>
+                <pre><code>#include &lt;iostream&gt;
+
+int main() {
+    int num;
+    std::cout << "Enter a number: "; // Output
+    std::cin >> num;                 // Input
+    std::cout << "You entered: " << num << std::endl;
+    return 0;
+}</code></pre>
+
+                <h3>Namespaces</h3>
+                <p>Namespaces are used to organize code and prevent name collisions. The standard library (including `cout` and `cin`) is enclosed in the <span class="highlight">std</span> namespace.</p>
+                <p>To avoid prefixing everything with `std::`, you can use:</p>
+                <pre><code>using namespace std; 
+// Now you can just write 'cout' instead of 'std::cout'</code></pre>
+            </section>
+
+            <section class="topic-section" id="topic-classes">
+                <h2>2. Classes and Objects (OOP) 📦</h2>
+                <p>C++ is an **Object-Oriented Programming (OOP)** language, extending C with the concept of **Classes**.</p>
+                
+                <h3>Classes vs. Objects</h3>
+                <ul>
+                    <li><span class="highlight">Class</span>: A user-defined blueprint or prototype from which objects are created. It defines properties (data) and behaviors (functions).</li>
+                    <li><span class="highlight">Object</span>: An instance of a class. It is a physical entity created from the blueprint.</li>
+                </ul>
+
+                <h3>Example: Defining a Class</h3>
+                <pre><code>class Dog {
+public: // Access specifier
+    std::string name;
+    int age;
+
+    void bark() { // Member function
+        std::cout << name << " says Woof!\\n";
+    }
+};
+
+int main() {
+    Dog buddy;       // Object creation (buddy is an instance of Dog)
+    buddy.name = "Buddy";
+    buddy.bark();    // Call the member function
+    return 0;
+}</code></pre>
+
+                <div class="diagram-placeholder">
+                    <!-- [Diagram illustrating Class (Blueprint) to Object (Instance) relationship] -->
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-constructors">
+                <h2>3. Constructors and Destructors 🛠️</h2>
+                <p>These are special member functions automatically called when an object is created or destroyed, ensuring proper initialization and cleanup.</p>
+
+                <h3>Constructor</h3>
+                <p>A function with the **same name as the class** and no return type. It initializes the object's data members upon creation.</p>
+                <pre><code>class Car {
+public:
+    int speed;
+    
+    // Constructor
+    Car(int initialSpeed) { 
+        speed = initialSpeed;
+        std::cout << "Car started at " << speed << " km/h\\n";
+    }
+};
+
+// When we create an object: Car myCar(60);</code></pre>
+                
+                <h3>Destructor</h3>
+                <p>A function prefixed with a tilde (~), e.g., <span class="highlight">~Car()</span>. It is automatically called when the object goes out of scope, releasing resources (like dynamically allocated memory).</p>
+            </section>
+
+            <section class="topic-section" id="topic-encapsulation">
+                <h2>4. Encapsulation and Access Modifiers 🛡️</h2>
+                <p>**Encapsulation** is the binding of data (variables) and the functions that operate on that data into a single unit (the class).</p>
+                
+                <h3>Access Modifiers</h3>
+                <p>They control the visibility and access of class members:</p>
+                <ul>
+                    <li><span class="highlight">public</span>: Members are accessible from outside the class.</li>
+                    <li><span class="highlight">private</span>: Members are accessible only from within the class. This is key for data hiding.</li>
+                    <li><span class="highlight">protected</span>: Members are accessible within the class and by derived classes (used in Inheritance).</li>
+                </ul>
+
+                <h3>Data Hiding (Encapsulation)</h3>
+                <p>We typically make data members <span class="highlight">private</span> and provide public functions (<span class="highlight">getters</span> and <span class="highlight">setters</span>) to access them safely.</p>
+                <pre><code>class Account {
+private:
+    double balance; 
+public:
+    double getBalance() { return balance; } // Getter
+};</code></pre>
+                <div class="diagram-placeholder">
+                    <!-- [Diagram of a Capsule representing a Class, showing private data inside the capsule and public methods as the only external interface] -->
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-inheritance">
+                <h2>5. Inheritance and Polymorphism 🧬</h2>
+                <p>These are fundamental pillars of OOP, enabling code reusability and flexible design.</p>
+
+                <h3>Inheritance</h3>
+                <p>Allows a new class (**Derived Class**) to inherit properties and methods from an existing class (**Base Class**). This models the "is-a" relationship (e.g., A Car is-a Vehicle).</p>
+                <pre><code>class Vehicle { ... }; // Base Class
+
+class Car : public Vehicle { ... }; // Derived Class (inherits from Vehicle)</code></pre>
+
+                <h3>Polymorphism (Many Forms)</h3>
+                <p>Allows a single interface to be used for a general class of actions. In C++, this is achieved via **Function Overloading** (same name, different parameters) and **Virtual Functions** (runtime polymorphism).</p>
+                <div class="diagram-placeholder">
+                    <!-- [Diagram illustrating Inheritance with a tree structure: Vehicle (Base) branching into Car and Motorcycle (Derived)] -->
+                </div>
+            </section>
+            
+            <section class="topic-section" id="topic-templates">
+                <h2>6. Templates and Generics 🧩</h2>
+                <p>Templates allow functions and classes to operate with generic types. This is essential for writing reusable code that is independent of the data type.</p>
+
+                <h3>Function Templates</h3>
+                <p>Creates a single function definition that can be used with different data types.</p>
+                <pre><code>template &lt;typename T&gt;
+T findMax(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    std::cout << findMax(10, 20) << "\\n";  // T is int
+    std::cout << findMax(3.5, 1.2) << "\\n"; // T is double
+}</code></pre>
+
+                <h3>Class Templates</h3>
+                <p>Used to create generic container classes like Stacks or Queues that can store any data type.</p>
+            </section>
+
+            <section class="topic-section" id="topic-stl">
+                <h2>7. The Standard Template Library (STL) 📚</h2>
+                <p>The STL is a powerful set of C++ class templates that provide ready-to-use data structures and algorithms. It saves significant development time.</p>
+
+                <h3>Components of STL</h3>
+                <ul>
+                    <li><span class="highlight">Containers</span>: Structures to hold data (e.g., `vector`, `list`, `map`).</li>
+                    <li><span class="highlight">Algorithms</span>: Functions to process data in containers (e.g., `sort`, `find`, `reverse`).</li>
+                    <li><span class="highlight">Iterators</span>: Pointers-like objects used to traverse and access container elements.</li>
+                </ul>
+
+                <h3>Example: Using `vector`</h3>
+                <pre><code>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+std::vector&lt;int&gt; numbers = {5, 2, 8, 1};
+std::sort(numbers.begin(), numbers.end()); 
+// Sorts the vector to: {1, 2, 5, 8}</code></pre>
+            </section>
+            
+            <section class="topic-section" id="topic-memory">
+                <h2>8. Pointers and Smart Pointers 💡</h2>
+                <p>While C++ retains C-style pointers, modern C++ favors **Smart Pointers** for safer memory management, simplifying resource cleanup.</p>
+
+                <h3>C-Style Pointers</h3>
+                <p>Still used for dynamic memory allocation (<span class="highlight">new</span> and <span class="highlight">delete</span> operators).</p>
+                <pre><code>int *p = new int(10); // Allocate and initialize memory
+delete p;             // Must manually deallocate memory!</code></pre>
+
+                <h3>Smart Pointers</h3>
+                <p>Wrappers around raw pointers that automatically call `delete` when the pointer goes out of scope, preventing **memory leaks**.</p>
+                <p>Key types: <span class="highlight">unique_ptr</span> (exclusive ownership), <span class="highlight">shared_ptr</span> (shared ownership).</p>
+                <pre><code>#include &lt;memory&gt;
+
+// Memory automatically freed when 'myInt' goes out of scope
+std::unique_ptr&lt;int&gt; myInt(new int(10)); </code></pre>
+            </section>
+
+        </div>
+        
+    </main>
+
+    <div class="footer-wave"></div> 
+
+</body>
+</html>

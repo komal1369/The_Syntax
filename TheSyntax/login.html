@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syntax | Log In</title>
+    
+    <style>
+        /* Color Variables based on screenshot analysis */
+        :root {
+            --dark-navy: #2C3E50; /* Primary background for main and header */
+            --light-green: #4CAF50; /* Accent color for buttons/certified */
+            --white-text: #FFFFFF;
+            --input-bg: #FFFFFF;
+            --card-bg: #37474F; /* Slightly lighter shade for the form card */
+            --text-muted: #B0BEC5;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        body {
+            background-color: var(--dark-navy);
+            color: var(--white-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 1. Header/Navigation Bar Styling */
+        header {
+            background-color: var(--dark-navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--white-text);
+            margin-right: 30px;
+        }
+
+        .links {
+            flex-grow: 1;
+            text-align: left;
+            margin-left: 20px;
+        }
+        
+        .links a {
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 0 10px;
+            font-size: 0.9em;
+            transition: color 0.2s;
+            opacity: 0.8;
+            white-space: nowrap; /* Prevent nav links from wrapping on one line if space is tight */
+        }
+
+        .links a:hover {
+            color: var(--light-green);
+            opacity: 1;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .log-in-link {
+            color: var(--white-text);
+            text-decoration: none;
+            margin-right: 20px;
+            padding: 8px 15px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            /* Highlight the "Log In" link since we're on the login page */
+            /* border-bottom: 2px solid var(--light-green); */ 
+        }
+
+        .log-in-link:hover {
+            opacity: 1;
+        }
+
+        .btn-certified {
+            background-color: var(--light-green);
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-certified:hover {
+            background-color: #3e8e41; /* Slightly darker green on hover */
+        }
+
+
+        /* 2. Login Page Content Styling */
+        .login-page-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .login-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-card h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--white-text);
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .login-form {
+            text-align: left;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--dark-navy);
+            font-size: 1em;
+        }
+        
+        .input-group input::placeholder {
+            color: #78909C;
+        }
+
+        .options {
+            text-align: right;
+            margin-bottom: 25px;
+        }
+
+        .forgot-password {
+            color: var(--light-green);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.2s;
+        }
+
+        .forgot-password:hover {
+            color: #3e8e41;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--light-green);
+            color: var(--white-text);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 25px;
+        }
+
+        .btn-login:hover {
+            background-color: #3e8e41;
+        }
+
+        .signup-text {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .signup-link {
+            color: var(--light-green);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .signup-link:hover {
+            color: #3e8e41;
+        }
+
+        /* 3. Subtle Footer Wave (Simulating the bottom of the original image) */
+        .footer-wave {
+            /* This is a placeholder for the aesthetic wave/texture at the bottom */
+            background: linear-gradient(to top, #e0f2f1 0%, #b2dfdb 50%, #80cbc4 100%);
+            height: 100px;
+            width: 100%;
+            margin-top: auto; /* Push it to the bottom */
+            /* You'd use a more complex CSS or SVG for a true wave shape */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">The Syntax</div>
+            <nav class="links">
+                <a href="#">C</a>
+                <a href="#">C++</a>
+                <a href="#">JAVA</a>
+                <a href="#">PYTHON</a>
+                <a href="#">JAVASCRIPT</a>
+                <a href="#">C#</a>
+                <a href="#">PHP</a>
+                <a href="#">REACT</a>
+                <a href="#">BOOTSTRAP</a>
+                <a href="#">MYSQL</a>
+                <a href="#">GIT</a>
+            </nav>
+            <div class="actions">
+                <a href="#" class="log-in-link">Log In</a>
+                <a href="#" class="btn-certified">Get Certified</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="login-page-content">
+        <div class="login-card">
+            <h2>Welcome Back</h2>
+            <p>Log in to continue learning.</p>
+            
+            <form class="login-form">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="options">
+                    <a href="signup.html" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">LOG IN</button>
+            </form>
+
+            <p class="signup-text">
+                Don't have an account? <a href="signup.html" class="signup-link">Sign Up</a>
+            </p>
+        </div>
+    </main>
+
+    <div class="footer-wave"></div> 
+
+</body>
+</html>

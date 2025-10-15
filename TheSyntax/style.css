@@ -1,0 +1,406 @@
+ /* CSS Variables based on the requested theme */
+        :root {
+            --color-dark-primary: #2C3E50; /* Deep Slate Blue */
+            --color-accent-green: #00B16A; /* Bright Green */
+            --color-light-text: #ECF0F1;
+            --color-nav-links: #D1D5DB;
+            --color-content-bg: #D4F2E9; /* Light Mint Green */
+            --font-family: 'Inter', sans-serif;
+        }
+
+        /* ----------------------- General & Layout ----------------------- */
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            color: var(--color-light-text);
+            background-color: #F0F4F8; /* Light gray body background */
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ----------------------- 1. Navbar (Top Bar) ----------------------- */
+        .navbar {
+            background-color: var(--color-dark-primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-signup {
+            background-color: var(--color-accent-green);
+            color: white;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-signup:hover {
+            background-color: #00995a;
+        }
+        
+        .btn-login {
+            color: var(--color-nav-links);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .btn-login:hover {
+            color: white;
+        }
+
+
+        /* ----------------------- 2. Options Section (Secondary Nav) ----------------------- */
+        .options-section {
+            background-color: #3C5267; /* Slightly lighter dark shade */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Allows horizontal scrolling on small screens */
+            white-space: nowrap; /* Prevents wrapping of links */
+            -webkit-overflow-scrolling: touch;
+            padding: 0 20px;
+        }
+
+        .options-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 1280px; /* Aligns with main container */
+        }
+
+        .options-list li {
+            padding: 10px 15px;
+        }
+
+        .options-list a {
+            color: var(--color-nav-links);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .options-list a:hover {
+            color: white;
+        }
+
+        /* ----------------------- 3. Search Section (Hero) ----------------------- */
+        .hero-section {
+            background-color: var(--color-dark-primary);
+            padding: 80px 0 120px 0; /* Extra padding at the bottom for the separator */
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero-section .container {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 4.5rem); /* Responsive font size */
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        /* Search Bar Styling */
+        .search-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 1rem;
+            color: #333;
+            border: none;
+            outline: none;
+        }
+        
+        .search-button {
+            width: 70px;
+            background-color: var(--color-accent-green);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .search-button:hover {
+            background-color: #00995a;
+        }
+
+        .search-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Separator Effect (The Diagonal Cut) */
+        .diagonal-separator-wrapper {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+            margin-top: -1px; /* Prevents a tiny gap artifact */
+        }
+
+        .diagonal-separator {
+            content: '';
+            width: 100%;
+            height: 200px; 
+            background-color: var(--color-content-bg); 
+            transform: skewY(-3deg);
+            transform-origin: top left;
+            position: absolute;
+            top: -120px; 
+            z-index: 5;
+        }
+        
+        /* Placeholder Content Section */
+        .content-section {
+            display: flex;
+            background-color: var(--color-content-bg);
+            color: #34495E;
+            padding: 50px 0;
+            min-height: 50vh;
+        }
+        .c-syntax{
+            width: 300px; 
+            margin-right: 100px;
+            background-color: #f7f7f7; 
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+        .c-syntax h2 {
+            font-size: 24px; 
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #34495E;
+        }
+        .main-syntax{
+            background-color: #fff; 
+            padding: 15px;
+            border-left: 5px solid #04aa6d; 
+            overflow-x: auto; 
+        }
+        
+        
+        .content-section1 {
+            display: flex;
+            background-color: #fcdbe8;
+            color: #34495E;
+            padding: 50px 0;
+            min-height: 50vh;
+        }
+        .content-section1 p,.content-section2 p,.content-section3 p{
+            margin-left: 50px;
+        }
+        .cplus-syntax{
+            width: 300px; 
+            /* margin-right: 5px; */
+            margin-left: 95px;
+            background-color: #f7f7f7; 
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            align-items:flex-end;
+        }
+        .cplus-syntax h2 {
+            font-size: 24px; 
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #34495E;
+        }
+        .main-syntax1{
+            background-color: #fff; 
+            padding: 15px;
+            border-left: 5px solid #c68ab8; 
+            overflow-x: auto; 
+        }
+
+        .content-section2 {
+            background-color: #ffe5d9;
+            color: #34495E;
+            padding: 50px 0;
+            min-height: 50vh;
+            display: flex;
+        }
+        .java-syntax{
+            width: 300px; 
+            /* margin-right: 100px; */
+            margin-left: 95px;
+            background-color: #f7f7f7; 
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+        .java-syntax h2 {
+            font-size: 24px; 
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #34495E;
+        }
+        .main-syntax2{
+            background-color: #fff; 
+            padding: 15px;
+            border-left: 5px solid #ab8358; 
+            overflow-x: auto; 
+        }
+
+        .content-section3 {
+            background-color: #d8e2dc;
+            color: #34495E;
+            padding: 50px 0;
+            min-height: 50vh;
+            display: flex;
+        }
+        .python-syntax{
+            width: 300px; 
+            /* margin-right: 100px; */
+            margin-left: 95px;
+            background-color: #f7f7f7; 
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+        .python-syntax h2 {
+            font-size: 24px; 
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #34495E;
+        }
+        .main-syntax3{
+            background-color: #fff; 
+            padding: 15px;
+            border-left: 5px solid #5b8763; 
+            overflow-x: auto; 
+        }
+        
+        /* --- Footer Styling --- */
+
+.footer {
+    /* Set the background color to white/light gray to contrast with the dark content block */
+    height: 250px;
+    background-color: #2C3E50;
+    color: #333;
+    padding: 40px 0;
+    font-size: 14px;
+    border-top: 1px solid #ddd; /* A subtle separator */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto; /* Center the content */
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-col {
+    flex: 1; /* Distribute space somewhat evenly */
+    min-width: 200px; /* Ensures columns don't get too narrow */
+}
+
+/* Headings */
+.footer-col h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #282a35; /* Dark color for brand name */
+    margin-bottom: 10px;
+}
+
+.footer-col h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #04aa6d; /* Use the primary green color for section headings */
+}
+
+/* Links List */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col a {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: #04aa6d; /* Highlight links on hover with primary color */
+}
+
+/* About/Copyright Section */
+.footer-col.about p {
+    color: #777;
+    line-height: 1.6;
+}
+
+/* Social Icons (using emojis here for quick demonstration) */
+.social-icons a {
+    font-size: 20px;
+    margin-right: 15px;
+    color: #333;
+}
+
+.contact-email {
+    margin-top: 15px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+    }
+    .footer-col {
+        margin-bottom: 20px;
+    }
+}

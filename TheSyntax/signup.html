@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syntax | Sign Up</title>
+    
+    <style>
+        /* Color Variables based on screenshot analysis */
+        :root {
+            --dark-navy: #2C3E50; /* Primary background for main and header */
+            --light-green: #4CAF50; /* Accent color for buttons/certified */
+            --white-text: #FFFFFF;
+            --input-bg: #FFFFFF;
+            --card-bg: #37474F; /* Slightly lighter shade for the form card */
+            --text-muted: #B0BEC5;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        body {
+            background-color: var(--dark-navy);
+            color: var(--white-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 1. Header/Navigation Bar Styling */
+        header {
+            background-color: var(--dark-navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--white-text);
+            margin-right: 30px;
+        }
+
+        .links {
+            flex-grow: 1;
+            text-align: left;
+            margin-left: 20px;
+        }
+        
+        .links a {
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 0 10px;
+            font-size: 0.9em;
+            transition: color 0.2s;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+
+        .links a:hover {
+            color: var(--light-green);
+            opacity: 1;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .log-in-link {
+            color: var(--white-text);
+            text-decoration: none;
+            margin-right: 20px;
+            padding: 8px 15px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .log-in-link:hover {
+            opacity: 1;
+        }
+
+        .btn-certified {
+            background-color: var(--light-green);
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-certified:hover {
+            background-color: #3e8e41; /* Slightly darker green on hover */
+        }
+
+
+        /* 2. Sign Up Page Content Styling */
+        .signup-page-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        .signup-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .signup-card h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: var(--white-text);
+        }
+
+        .signup-card p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .signup-form {
+            text-align: left;
+        }
+
+        .input-group {
+            margin-bottom: 15px; /* Slightly smaller margin for more fields */
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--dark-navy);
+            font-size: 1em;
+        }
+        
+        .input-group input::placeholder {
+            color: #78909C;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .terms-checkbox a {
+            color: var(--light-green);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .terms-checkbox a:hover {
+            color: #3e8e41;
+        }
+
+        .btn-signup {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--light-green);
+            color: var(--white-text);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 25px;
+        }
+
+        .btn-signup:hover {
+            background-color: #3e8e41;
+        }
+
+        .login-text {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .login-link {
+            color: var(--light-green);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .login-link:hover {
+            color: #3e8e41;
+        }
+
+        /* 3. Subtle Footer Wave */
+        .footer-wave {
+            background: linear-gradient(to top, #e0f2f1 0%, #b2dfdb 50%, #80cbc4 100%);
+            height: 100px;
+            width: 100%;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">The Syntax</div>
+            <nav class="links">
+                <a href="#">C</a>
+                <a href="#">C++</a>
+                <a href="#">JAVA</a>
+                <a href="#">PYTHON</a>
+                <a href="#">JAVASCRIPT</a>
+                <a href="#">C#</a>
+                <a href="#">PHP</a>
+                <a href="#">REACT</a>
+                <a href="#">BOOTSTRAP</a>
+                <a href="#">MYSQL</a>
+                <a href="#">GIT</a>
+            </nav>
+            <div class="actions">
+                <a href="#" class="log-in-link">Log In</a>
+                <a href="#" class="btn-certified">Get Certified</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="signup-page-content">
+        <div class="signup-card">
+            <h2>Start Coding Today</h2>
+            <p>Create your free account to access all tutorials.</p>
+            
+            <form class="signup-form">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+                
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn-signup">CREATE ACCOUNT</button>
+            </form>
+
+            <p class="login-text">
+                Already have an account? <a href="login.html" class="login-link">Log In</a>
+            </p>
+        </div>
+    </main>
+
+    <div class="footer-wave"></div> 
+
+</body>
+</html>

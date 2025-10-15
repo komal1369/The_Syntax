@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syntax | Python Language Deep Dive</title>
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --dark-navy: #2C3E50; 
+            --light-green: #4CAF50; 
+            --white-text: #FFFFFF;
+            --text-muted: #B0BEC5;
+            --card-bg: #37474F; 
+            --code-bg: #1e272e;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-navy);
+            color: var(--white-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* 1. Header/Navigation Bar Styling */
+        header {
+            background-color: var(--dark-navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--white-text);
+            margin-right: 30px;
+        }
+
+        .links a {
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 0 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+        
+        /* Highlight PYTHON language link (4th link) */
+        .links a:nth-child(4) { 
+            color: var(--light-green);
+            font-weight: bold;
+            opacity: 1;
+        }
+
+        .actions a { color: var(--white-text); text-decoration: none; margin-left: 10px; }
+        .btn-certified { background-color: var(--light-green); padding: 8px 15px; border-radius: 5px; font-weight: bold; }
+
+        /* 2. Python Language Page Content - Styling Main Sections */
+        .python-page-content {
+            flex-grow: 1;
+            padding: 0px 100px 50px;
+            text-align: center;
+        }
+
+        /* Essential Topics Grid (Navigation) */
+        .topics-section {
+            padding: 40px 0;
+        }
+        
+        .topics-section h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .topics-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .topics-list a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .topics-list li {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-left: 4px solid var(--light-green);
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .topics-list li:hover {
+            background-color: #3E5160; 
+            transform: translateY(-3px);
+        }
+
+        /* Tutorial Content Styles */
+        .tutorial-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding-top: 50px;
+            margin-top: -50px;
+        }
+        
+        .topic-section {
+            margin-bottom: 80px;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-section h2 {
+            font-size: 2.2em;
+            color: var(--light-green);
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            text-align: left;
+        }
+
+        .topic-section h3 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--white-text);
+        }
+
+        .topic-section p, .topic-section ul {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .topic-section ul {
+            margin-left: 20px;
+        }
+
+        /* Code Block Styling */
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            color: #f1c40f; 
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1em;
+            white-space: pre;
+        }
+        
+        /* Image/Diagram Placeholder Styling */
+        .diagram-placeholder {
+            background-color: #1a242c;
+            border: 1px dashed var(--light-green);
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            color: var(--text-muted);
+            font-style: italic;
+            border-radius: 4px;
+        }
+        
+        /* Utility */
+        .highlight {
+            color: var(--light-green);
+            font-weight: bold;
+        }
+
+        /* 3. Subtle Footer Wave */
+        .footer-wave {
+            background: linear-gradient(to top, #e0f2f1 0%, #b2dfdb 50%, #80cbc4 100%);
+            height: 100px;
+            width: 100%;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">The Syntax</div>
+            <nav class="links">
+                <a href="c.html">C</a>
+                <a href="cplus.html">C++</a>
+                <a href="java.html">JAVA</a>
+                <a href="python.html">PYTHON</a>
+                <a href="csharp.html">C#</a>
+                <a href="js.html">JAVASCRIPT</a>
+                <a href="php.html">PHP</a>
+                <a href="mysql.html">MYSQL</a>
+            </nav>
+            <div class="actions">
+                <a href="#" class="log-in-link">Log In</a>
+                <a href="#" class="btn-certified">Get Certified</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="python-page-content">
+        
+        <!-- <section class="hero-section" style="padding-top: 50px;">
+            <a href="#tutorial-start" class="btn-start">Start the Python Course Now</a>
+        </section> -->
+
+        <section class="topics-section" id="tutorial-start">
+            <h2>Essential Python Topics</h2>
+            <ul class="topics-list">
+                <a href="#topic-syntax"><li>Basic Syntax and Indentation</li></a>
+                <a href="#topic-data-types"><li>Core Data Types (Lists, Tuples, Dicts)</li></a>
+                <a href="#topic-flow"><li>Control Flow and Iteration</li></a>
+                <a href="#topic-functions"><li>Functions and Lambda Expressions</li></a>
+                <a href="#topic-oop"><li>Classes and Object-Oriented Programming</li></a>
+                <a href="#topic-files"><li>File Handling and Context Managers</li></a>
+                <a href="#topic-modules"><li>Modules, Packages, and PIP</li></a>
+                <a href="#topic-exceptions"><li>Error and Exception Handling</li></a>
+            </ul>
+        </section>
+
+        <hr style="border-color: rgba(255, 255, 255, 0.1); margin: 40px 0;">
+
+        <div class="tutorial-content">
+
+            <section class="topic-section" id="topic-syntax">
+                <h2>1. Basic Syntax and Indentation 🐍</h2>
+                <p>Python's most distinctive feature is its reliance on **whitespace and indentation** to define code blocks, replacing the curly braces (<span class="highlight">{}</span>) used in C or Java.</p>
+                
+                <h3>Readability is Key</h3>
+                <p>Python enforces clean, highly readable code, adhering to the **Zen of Python** principles.</p>
+                
+                <h3>Indentation Example</h3>
+                <p>Code blocks (inside loops, functions, and if statements) must be uniformly indented (usually 4 spaces):</p>
+                <pre><code># This is correct Python syntax
+number = 10 
+if number > 5:
+<span style="color: #66d9ef;">    # This line is inside the if block</span>
+    print("Greater than 5") 
+<span style="color: #66d9ef;"># This line is outside the if block</span>
+print("Done")</code></pre>
+                
+                <div class="diagram-placeholder">
+                    <!-- [Diagram illustrating Python code blocks defined by 4 spaces of indentation versus curly braces in other languages] -->
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-data-types">
+                <h2>2. Core Data Types (Lists, Tuples, Dicts) 🗃️</h2>
+                <p>Python offers powerful built-in **collection data types** that simplify data manipulation.</p>
+                
+                <ul>
+                    <li><span class="highlight">List (Mutable)</span>: Ordered, changeable collection. Declared with square brackets <span class="highlight">[]</span>.</li>
+                    <li><span class="highlight">Tuple (Immutable)</span>: Ordered, unchangeable collection. Declared with parentheses <span class="highlight">()</span>.</li>
+                    <li><span class="highlight">Dictionary (Mutable)</span>: Unordered, changeable collection of **key-value pairs**. Declared with curly braces <span class="highlight">{}</span>.</li>
+                </ul>
+
+                <h3>Example: Dictionary</h3>
+                <p>Dictionaries are optimized for retrieving values when the key is known (like a phonebook).</p>
+                <pre><code>user = {
+    "name": "Alex",
+    "age": 30,
+    "city": "London"
+}
+print(user["name"])  # Output: Alex
+user["age"] = 31     # Changeable (Mutable)</code></pre>
+
+                <div class="diagram-placeholder">
+                    <!-- [Diagram showing a Python Dictionary with key-value pairs stored in memory] -->
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-flow">
+                <h2>3. Control Flow and Iteration 🚦</h2>
+                <p>Python uses familiar control structures like <span class="highlight">if/elif/else</span> for conditionals and <span class="highlight">for/while</span> for loops, but with specific Python syntax.</p>
+
+                <h3>For Loop Iteration</h3>
+                <p>The <span class="highlight">for</span> loop is typically used to iterate over items of any sequence (like a list or a range).</p>
+                <pre><code>fruits = ["apple", "banana", "cherry"]
+
+for fruit in fruits:
+    print(f"I like {fruit}")</code></pre>
+                
+                <h3>The `range()` Function</h3>
+                <p>The `range()` function is often used to iterate a specific number of times.</p>
+                <pre><code># Repeats 5 times (from 0 up to, but not including, 5)
+for i in range(5):
+    print(i) </code></pre>
+                <div class="diagram-placeholder">
+                    <!-- [Flowchart of a Python For Loop showing iteration over an iterable list] -->
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-functions">
+                <h2>4. Functions and Lambda Expressions 🔀</h2>
+                <p>Functions are defined using the <span class="highlight">def</span> keyword and are central to modular programming.</p>
+
+                <h3>Function Definition</h3>
+                <pre><code>def greet(name):
+    """This function greets the person passed in as a parameter."""
+    return "Hello, " + name + "!"
+
+message = greet("Alice") 
+print(message)</code></pre>
+
+                <h3>Lambda Expressions (Anonymous Functions)</h3>
+                <p>A **lambda function** is a small, single-expression function defined with the <span class="highlight">lambda</span> keyword. They are usually used when a function is needed for a short period, often as an argument to a higher-order function like `map` or `filter`.</p>
+                <pre><code># Syntax: lambda arguments: expression
+add_ten = lambda x: x + 10
+print(add_ten(5)) # Output: 15</code></pre>
+            </section>
+            
+            <section class="topic-section" id="topic-oop">
+                <h2>5. Classes and Object-Oriented Programming 🏗️</h2>
+                <p>Python supports **Object-Oriented Programming (OOP)**, allowing you to define custom classes that bundle data and functionality.</p>
+
+                <h3>The `__init__` Method</h3>
+                <p>This is the **constructor** method in Python. It's automatically called when a new object is created and is used to initialize object attributes.</p>
+                <pre><code>class Car:
+    # Constructor
+    def __init__(self, color, year):
+        self.color = color 
+        self.year = year
+        
+    def describe(self):
+        print(f"This car is {self.color} and was made in {self.year}.")
+
+my_car = Car("Red", 2022) 
+my_car.describe()</code></pre>
+
+                <h3>`self` Keyword</h3>
+                <p>The <span class="highlight">self</span> parameter is a reference to the current instance of the class, and is mandatory as the first parameter in instance methods.</p>
+            </section>
+
+            <section class="topic-section" id="topic-files">
+                <h2>6. File Handling and Context Managers 📂</h2>
+                <p>Python makes reading and writing files simple. The recommended way to handle file operations is using the <span class="highlight">with</span> statement, which employs **context managers**.</p>
+
+                <h3>The `with` Statement</h3>
+                <p>Using `with` ensures that the file is automatically closed, even if errors occur, preventing resource leaks.</p>
+                <pre><code># 'w' mode for writing, 'r' for reading
+with open('data.txt', 'w') as file:
+    file.write("Hello from Python!\n")
+    
+# Reading the file
+with open('data.txt', 'r') as file:
+    content = file.read()
+    print(content)</code></pre>
+
+                <div class="diagram-placeholder">
+                    <!-- [Flowchart illustrating file handling with 'with open': start -> open file -> execute block -> automatically close file] -->
+                </div>
+            </section>
+            
+            <section class="topic-section" id="topic-modules">
+                <h2>7. Modules, Packages, and PIP 📚</h2>
+                <p>Python's strength comes from its vast ecosystem of reusable code.</p>
+
+                <ul>
+                    <li><span class="highlight">Module</span>: A file containing Python code (e.g., `my_module.py`).</li>
+                    <li><span class="highlight">Package</span>: A directory containing multiple modules and a special `__init__.py` file.</li>
+                </ul>
+
+                <h3>The `import` Statement</h3>
+                <p>Used to bring functionality from modules or packages into your current script.</p>
+                <pre><code>import math 
+print(math.sqrt(16)) # Use function from the built-in math module
+
+from datetime import date # Import specific part
+today = date.today()</code></pre>
+
+                <h3>PIP (Package Installer for Python)</h3>
+                <p>PIP is the standard package manager used to install third-party libraries (e.g., NumPy, Django, Requests) from the Python Package Index (PyPI).</p>
+                <pre><code># Command to install a new library
+pip install requests</code></pre>
+            </section>
+            
+            <section class="topic-section" id="topic-exceptions">
+                <h2>8. Error and Exception Handling 🛑</h2>
+                <p>Python uses the <span class="highlight">try...except</span> block to gracefully handle runtime errors, ensuring the program doesn't crash.</p>
+
+                <h3>The `try...except` Structure</h3>
+                <ul>
+                    <li><span class="highlight">try</span>: The code block to monitor for errors.</li>
+                    <li><span class="highlight">except</span>: The code block that executes if an exception is caught. You can specify the type of exception (e.g., `ValueError`, `ZeroDivisionError`).</li>
+                    <li><span class="highlight">finally</span>: (Optional) Code that executes regardless of the outcome (similar to Java).</li>
+                </ul>
+
+                <h3>Example</h3>
+                <pre><code>try:
+    num = int(input("Enter an integer: "))
+    result = 10 / num
+except ValueError:
+    print("Error: That was not a valid number.")
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+else:
+    print(f"Result: {result}")</code></pre>
+            </section>
+
+        </div>
+        
+    </main>
+
+    <div class="footer-wave"></div> 
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About The Syntax</title>
+    <style>
+        /* --- Global Containers and Layout (assuming these exist from homepage) --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- 1. About Hero Section --- */
+.about-hero {
+    /* Matching the dark gray background of your homepage hero */
+    background-color: #282a35;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    /* Use the primary green for an accent keyword */
+    color: #04aa6d; 
+}
+
+.about-hero p {
+    font-size: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --- 2. Core Philosophy Section --- */
+.philosophy-section {
+    background-color: #f7f7f7; /* Light gray background */
+    padding: 60px 0;
+    text-align: center;
+}
+
+.philosophy-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.philosophy-card {
+    flex: 1;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.philosophy-card .icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.philosophy-card h3 {
+    font-size: 22px;
+    color: #282a35;
+    margin-bottom: 10px;
+}
+
+/* --- 3. Team Section --- */
+.team-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.team-section h2 {
+    font-size: 36px;
+    color: #282a35;
+    margin-bottom: 40px;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    width: 250px;
+    text-align: center;
+}
+
+.team-photo {
+    width: 150px;
+    height: 150px;
+    background-color: #ddd; /* Placeholder for an image */
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    border: 4px solid #04aa6d; /* Green border for accent */
+}
+
+.team-member h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #04aa6d;
+}
+
+.team-member .title {
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    color: #777;
+    line-height: 1.5;
+}
+
+/* --- Media Query for Mobile --- */
+@media (max-width: 768px) {
+    .about-hero h1 {
+        font-size: 36px;
+    }
+
+    .philosophy-grid {
+        flex-direction: column;
+    }
+}
+    </style>
+<body>
+
+    <header class="main-header">
+        </header>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>Our Mission: Decode, Learn, Create.</h1>
+            <p>We believe high-quality programming education should be accessible to everyone, everywhere. The Syntax is dedicated to breaking down complex coding concepts into simple, actionable steps.</p>
+        </div>
+    </section>
+
+    <section class="philosophy-section">
+        <div class="container philosophy-grid">
+            <div class="philosophy-card">
+                <span class="icon">💡</span>
+                <h3>Clarity First</h3>
+                <p>We prioritize clear, concise explanations over jargon. Learning should be intuitive, not frustrating.</p>
+            </div>
+            <div class="philosophy-card">
+                <span class="icon">🚀</span>
+                <h3>Hands-On Practice</h3>
+                <p>Knowledge is useless without application. Our tutorials are built around interactive coding exercises.</p>
+            </div>
+            <div class="philosophy-card">
+                <span class="icon">🌐</span>
+                <h3>Community Driven</h3>
+                <p>We foster a supportive environment where beginners and experts can share knowledge and grow together.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2>Meet the Founders</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-photo"></div>
+                    <h3>Alex Chen</h3>
+                    <p class="title">Chief Architect & CTO</p>
+                    <p>Alex is passionate about system design and compilers, bringing 15+ years of industry experience to guide our technical roadmap.</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo"></div>
+                    <h3>Maria Rodriguez</h3>
+                    <p class="title">Head of Curriculum</p>
+                    <p>With a background in computer science education, Maria ensures all content is pedagogically sound and highly effective for learners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        </footer>
+
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syntax | C Language Deep Dive</title>
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --dark-navy: #2C3E50; 
+            --light-green: #4CAF50; 
+            --white-text: #FFFFFF;
+            --text-muted: #B0BEC5;
+            --card-bg: #37474F; 
+            --code-bg: #1e272e; /* Darker background for code blocks */
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            scroll-behavior: smooth; /* Enable smooth scrolling for anchors */
+        }
+
+        body {
+            background-color: var(--dark-navy);
+            color: var(--white-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* 1. Header/Navigation Bar Styling (Minimized for brevity, but kept consistent) */
+        header {
+            background-color: var(--dark-navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--white-text);
+            margin-right: 30px;
+        }
+
+        .links a {
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 0 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+        
+        .links a:nth-child(1) { color: var(--light-green); font-weight: bold; opacity: 1; }
+        .actions a { color: var(--white-text); text-decoration: none; margin-left: 10px; }
+        .btn-certified { background-color: var(--light-green); padding: 8px 15px; border-radius: 5px; font-weight: bold; }
+
+
+        /* 2. C Language Page Content - Styling Main Sections */
+        .c-page-content {
+            flex-grow: 1;
+            padding: 0px 100px 50px;
+            text-align: center;
+        }
+
+        /* Essential C Topics (Grid/Navigation) */
+        .topics-section {
+            padding: 40px 0;
+        }
+        
+        .topics-section h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .topics-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .topics-list a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .topics-list li {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-left: 4px solid var(--light-green);
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            height: 100%; /* Ensure all cards are same height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .topics-list li:hover {
+            background-color: #3E5160; 
+            transform: translateY(-3px);
+        }
+
+        /* Tutorial Content Styles */
+        .tutorial-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding-top: 50px; /* Space for fixed header/navbar */
+            margin-top: -50px; /* Compensate for padding to ensure correct scroll position */
+        }
+        
+        .topic-section {
+            margin-bottom: 80px;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-section h2 {
+            font-size: 2.2em;
+            color: var(--light-green);
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            text-align: left;
+        }
+
+        .topic-section h3 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--white-text);
+        }
+
+        .topic-section p, .topic-section ul {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .topic-section ul {
+            margin-left: 20px;
+        }
+
+        /* Code Block Styling */
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            color: #f1c40f; /* Yellowish color for code */
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1em;
+            white-space: pre;
+        }
+        
+        /* Image/Diagram Placeholder Styling */
+        .diagram-placeholder {
+            background-color: #1a242c;
+            border: 1px dashed var(--light-green);
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            color: var(--text-muted);
+            font-style: italic;
+            border-radius: 4px;
+        }
+        
+        /* Utility */
+        .highlight {
+            color: var(--light-green);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">The Syntax</div>
+            <nav class="links">
+                <a href="c.html">C</a>
+                <a href="cplus.html">C++</a>
+                <a href="java.html">JAVA</a>
+                <a href="python.html">PYTHON</a>
+                <a href="csharp.html">C#</a>
+                <a href="js.html">JAVASCRIPT</a>
+                <a href="php.html">PHP</a>
+                <a href="mysql.html">MYSQL</a>
+            </nav>
+            <div class="actions">
+                <a href="#" class="log-in-link">Log In</a>
+                <a href="#" class="btn-certified">Get Certified</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="c-page-content">
+        
+        
+
+        <section class="topics-section" id="tutorial-start">
+            <h2>Essential C Topics</h2>
+            <ul class="topics-list">
+                <a href="#topic-gcc"><li>Introduction and Setup (GCC)</li></a>
+                <a href="#topic-data-types"><li>Variables and Data Types</li></a>
+                <a href="#topic-control-flow"><li>Control Flow: If/Else and Loops</li></a>
+                <a href="#topic-functions"><li>Functions and Scope</li></a>
+                <a href="#topic-arrays"><li>Arrays and Strings</li></a>
+                <a href="#topic-pointers"><li>Pointers and Memory Allocation (Malloc/Free)</li></a>
+                <a href="#topic-structs"><li>Structures and Unions</li></a>
+                <a href="#topic-file-io"><li>File I/O and Preprocessor Directives</li></a>
+            </ul>
+        </section>
+
+        <hr style="border-color: rgba(255, 255, 255, 0.1); margin: 40px 0;">
+
+        <div class="tutorial-content">
+
+            <section class="topic-section" id="topic-gcc">
+                <h2>1. Introduction and Setup (GCC) ⚙️</h2>
+                <p>Before writing C code, you need a **Compiler**. The compiler translates your human-readable C code into a machine-readable executable file.</p>
+                
+                <h3>What is GCC?</h3>
+                <p>GCC stands for **GNU Compiler Collection**. It is the most common and widely used compiler for C programs. You use it via your command line interface (CLI).</p>
+
+                <h3>Compilation Process</h3>
+                <p>The C compilation process involves four main stages: Preprocessing, Compilation, Assembly, and Linking.</p>
+                <div class="diagram-placeholder">
+                    <!-- <img src="c-compile.jpg" height="150px" width="800px"> -->
+                                    </div>
+                
+                <h3>Example: Compiling "Hello World"</h3>
+                <p>Assume your code is saved as <span class="highlight">hello.c</span>:</p>
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Hello World!\\n");
+    return 0;
+}</code></pre>
+
+                <p>To compile and run from the terminal:</p>
+                <pre><code><span style="color: #66d9ef;"># Compile the code (outputs executable 'a.out' or 'hello')</span>
+gcc hello.c -o hello
+
+<span style="color: #66d9ef;"># Run the executable</span>
+./hello
+
+<span style="color: #a6e22e;"># Output:</span>
+Hello World!</code></pre>
+            </section>
+
+            <section class="topic-section" id="topic-data-types">
+                <h2>2. Variables and Data Types 🔢</h2>
+                <p>A **variable** is a named storage location in memory. The **data type** defines how much space the variable takes up and what kind of value it can hold.</p>
+                
+                <h3>Primary Data Types</h3>
+                <ul>
+                    <li><span class="highlight">int</span>: Integers (whole numbers), typically 4 bytes. e.g., 10, -5.</li>
+                    <li><span class="highlight">float</span>: Single-precision floating-point numbers, typically 4 bytes. e.g., 3.14.</li>
+                    <li><span class="highlight">double</span>: Double-precision floating-point numbers, typically 8 bytes (more precise).</li>
+                    <li><span class="highlight">char</span>: A single character or small integer, typically 1 byte. e.g., 'A', '7'.</li>
+                </ul>
+
+                <h3>Example: Declaration and Initialization</h3>
+                <pre><code>int age = 25;
+float pi = 3.14159;
+char initial = 'S';
+double distance = 1.05e-5; // Scientific notation</code></pre>
+
+                <div class="diagram-placeholder">
+                                    </div>
+            </section>
+
+            <section class="topic-section" id="topic-control-flow">
+                <h2>3. Control Flow: If/Else and Loops 🔁</h2>
+                <p>Control flow statements determine the order in which statements are executed. They are essential for creating dynamic and functional programs.</p>
+
+                <h3>Conditional Statements (if/else)</h3>
+                <p>Executes a block of code only if a specified condition is true.</p>
+                <pre><code>int score = 85;
+
+if (score >= 90) {
+    printf("Grade A\\n");
+} else if (score >= 80) {
+    printf("Grade B\\n");
+} else {
+    printf("Grade C or lower\\n");
+}</code></pre>
+                
+                <h3>Loops (for and while)</h3>
+                <p>Used to execute a block of code repeatedly.</p>
+                <p>The <span class="highlight">for</span> loop is ideal when you know the number of iterations:</p>
+                <pre><code>// Prints numbers from 0 to 4
+for (int i = 0; i < 5; i++) {
+    printf("%d ", i);
+}</code></pre>
+                
+                <p>The <span class="highlight">while</span> loop repeats as long as a condition is true:</p>
+                <pre><code>int count = 1;
+while (count <= 3) {
+    printf("Count: %d\\n", count);
+    count++;
+}</code></pre>
+                <div class="diagram-placeholder">
+                    <!-- [Flowchart of a 'for loop' showing Initialization, Condition check, Loop body execution, and Increment step] -->
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-functions">
+                <h2>4. Functions and Scope 🧱</h2>
+                <p>A **function** is a block of code that performs a specific task. They make code modular, reusable, and easier to manage.</p>
+
+                <h3>Function Structure</h3>
+                <p>A function must be declared (prototype), defined (implementation), and called (execution).</p>
+                <pre><code><span class="highlight">float calculate_area(float radius); // Function Prototype</span>
+
+int main() {
+    float r = 5.0;
+    float area = calculate_area(r); // Function Call
+    printf("Area: %.2f\\n", area);
+    return 0;
+}
+
+<span class="highlight">float calculate_area(float radius) { // Function Definition</span>
+    return 3.14159 * radius * radius;
+}</code></pre>
+
+                <h3>Scope</h3>
+                <p>**Scope** refers to the region of a program where a defined variable can be accessed. Variables declared inside a function (like `r` in `main`) are **local** to that function.</p>
+                <div class="diagram-placeholder">
+                    <!-- [Diagram showing two nested boxes representing main() scope and calculate_area() scope, highlighting a variable being accessible only within its box] -->
+                </div>
+            </section>
+            
+            <section class="topic-section" id="topic-arrays">
+                <h2>5. Arrays and Strings 📃</h2>
+                <p>An **Array** is a collection of elements of the same data type stored in contiguous memory locations. They are zero-indexed, meaning the first element is at index 0.</p>
+
+                <h3>Arrays</h3>
+                <p>Declaration: `dataType arrayName[size];`</p>
+                <pre><code>int scores[5] = {90, 85, 95, 78, 92};
+// Accessing the third element (index 2)
+printf("Third score: %d\\n", scores[2]); // Output: 95</code></pre>
+
+                <h3>Strings</h3>
+                <p>In C, a **string** is simply an array of characters terminated by a special null character (<span class="highlight">'\0'</span>).</p>
+                <pre><code>char greeting[15] = "Hello C!";
+// The size [15] is larger than the string (8 chars) + null terminator (1 char) to allow for expansion.</code></pre>
+                <div class="diagram-placeholder">
+                    <!-- [Diagram of a String in memory showing boxes for H, e, l, l, o, !, and the final box containing '\0'] -->
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-pointers">
+                <h2>6. **Pointers** and Memory Allocation (Malloc/Free) 🧠</h2>
+                <p>Pointers are C's most powerful feature. A **pointer** is a variable that stores the **memory address** of another variable.</p>
+
+                <h3>Key Operators</h3>
+                <ul>
+                    <li><span class="highlight">& (Address-of)</span>: Returns the memory address of a variable.</li>
+                    <li><span class="highlight">* (Dereference)</span>: Accesses the value stored at the address pointed to by the pointer.</li>
+                </ul>
+
+                <h3>Example: Pointer Usage</h3>
+                <pre><code>int x = 10;
+int *ptr;     // Declaration: ptr is a pointer to an integer
+ptr = &x;     // Assignment: ptr now holds the address of x
+
+printf("Value of x: %d\\n", *ptr); // Output: 10 (Dereferencing ptr)
+printf("Address of x: %p\\n", ptr); // Output: A memory address (e.g., 0x7ffee...)</code></pre>
+
+                <h3>Dynamic Memory Allocation</h3>
+                <p>Functions like <span class="highlight">malloc()</span> (Memory Allocation) let you allocate memory during program execution (runtime), which is crucial for dynamic data structures like linked lists.</p>
+                <pre><code>int *arr = (int*) malloc(5 * sizeof(int)); // Allocate memory for 5 integers
+
+<span style="color: #66d9ef;">// Use the memory...</span>
+
+free(arr); // MUST be called to release the memory when done (prevents memory leaks)</code></pre>
+                <div class="diagram-placeholder">
+                    <!-- [Diagram showing a variable 'x' in the stack and a pointer 'ptr' pointing an arrow from the stack to the address of 'x' in the heap] -->
+                </div>
+            </section>
+            
+            <section class="topic-section" id="topic-structs">
+                <h2>7. Structures and Unions 🧩</h2>
+                <p>Structures and Unions are **user-defined data types** that allow you to group related variables of different data types under a single name.</p>
+
+                <h3>Structures (struct)</h3>
+                <p>A structure groups elements that are stored in **separate memory locations**. All members of a struct occupy memory simultaneously.</p>
+                <pre><code>struct Student {
+    int id;
+    char name[50];
+    float gpa;
+};
+
+struct Student s1;
+s1.id = 101;
+// Access members using the dot (.) operator</code></pre>
+
+                <h3>Unions (union)</h3>
+                <p>A union groups elements that share the **same memory location**. Only one member of a union can hold a value at any given time, saving memory.</p>
+                <div class="diagram-placeholder">
+                    <!-- [Diagram showing a Struct where ID and Name boxes are separate, versus a Union where ID and Name occupy the same shared box] -->
+                </div>
+            </section>
+            
+            <section class="topic-section" id="topic-file-io">
+                <h2>8. File I/O and Preprocessor Directives 💾</h2>
+
+                <h3>File Input/Output (I/O)</h3>
+                <p>C provides functions to handle file operations, allowing you to store and retrieve data persistently. The central concept is the **FILE pointer**.</p>
+                <pre><code>#include &lt;stdio.h&gt;
+
+FILE *fp;
+fp = fopen("data.txt", "w"); // Open file 'data.txt' for writing
+fprintf(fp, "This is data."); // Write to the file
+fclose(fp); // Close the file (crucial step!)</code></pre>
+
+                <h3>Preprocessor Directives</h3>
+                <p>These commands (starting with <span class="highlight">#</span>) are processed by the preprocessor before compilation. The most common are:</p>
+                <ul>
+                    <li><span class="highlight">#include</span>: Includes the contents of another file (like `<stdio.h>`).</li>
+                    <li><span class="highlight">#define</span>: Creates a macro (a symbolic constant or a simple function replacement).</li>
+                </ul>
+                <pre><code>#define PI 3.14159 // Define a constant
+
+float area = PI * radius * radius; // PI is replaced by 3.14159 before compilation</code></pre>
+            </section>
+
+        </div>
+        
+    </main>
+
+    <div class="footer-wave"></div> 
+
+</body>
+</html>

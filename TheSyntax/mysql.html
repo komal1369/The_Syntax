@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syntax | MySQL Database Deep Dive</title>
+    
+    <style>
+        /* Color Variables */
+        :root {
+            --dark-navy: #2C3E50; 
+            --light-green: #00758F; /* MySQL's primary color (Dark Cyan/Blue) */
+            --white-text: #FFFFFF;
+            --text-muted: #B0BEC5;
+            --card-bg: #37474F; 
+            --code-bg: #1e272e;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-navy);
+            color: var(--white-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* 1. Header/Navigation Bar Styling */
+        header {
+            background-color: var(--dark-navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--white-text);
+            margin-right: 30px;
+        }
+
+        .links a {
+            color: var(--white-text);
+            text-decoration: none;
+            padding: 0 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+        
+        /* Highlight MySQL language link (10th link) */
+        .links a:nth-child(10) { 
+            color: var(--light-green);
+            font-weight: bold;
+            opacity: 1;
+        }
+
+        .actions a { color: var(--white-text); text-decoration: none; margin-left: 10px; }
+        .btn-certified { background-color: var(--light-green); padding: 8px 15px; border-radius: 5px; font-weight: bold; color: var(--dark-navy); }
+
+        /* 2. MySQL Page Content - Styling Main Sections */
+        .mysql-page-content {
+            flex-grow: 1;
+            padding: 0px 100px 50px;
+            text-align: center;
+        }
+
+        /* Essential Topics Grid (Navigation) */
+        .topics-section {
+            padding: 40px 0;
+        }
+        
+        .topics-section h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .topics-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .topics-list a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .topics-list li {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-left: 4px solid var(--light-green);
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.2s, transform 0.2s;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .topics-list li:hover {
+            background-color: #3E5160; 
+            transform: translateY(-3px);
+        }
+
+        /* Tutorial Content Styles */
+        .tutorial-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding-top: 50px;
+            margin-top: -50px;
+        }
+        
+        .topic-section {
+            margin-bottom: 80px;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .topic-section h2 {
+            font-size: 2.2em;
+            color: var(--light-green);
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            text-align: left;
+        }
+
+        .topic-section h3 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--white-text);
+        }
+
+        .topic-section p, .topic-section ul, .topic-section table {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .topic-section ul {
+            margin-left: 20px;
+        }
+        
+        .topic-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .topic-section th, .topic-section td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            text-align: left;
+        }
+        .topic-section th {
+            background-color: #455A64;
+            color: var(--white-text);
+        }
+
+
+        /* Code Block Styling */
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            color: #f1c40f; 
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1em;
+            white-space: pre;
+            text-transform: uppercase;
+        }
+        
+        /* Image/Diagram Placeholder Styling */
+        .diagram-placeholder {
+            background-color: #1a242c;
+            border: 1px dashed var(--light-green);
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            color: var(--text-muted);
+            font-style: italic;
+            border-radius: 4px;
+        }
+        
+        /* Utility */
+        .highlight {
+            color: var(--light-green);
+            font-weight: bold;
+        }
+        
+        .keyword {
+            color: #69F0AE; /* Light green for SQL keywords */
+            font-weight: bold;
+        }
+
+        /* 3. Subtle Footer Wave */
+        .footer-wave {
+            background: linear-gradient(to top, #e0f2ff 0%, #b2dfdb 50%, #80cbc4 100%);
+            height: 100px;
+            width: 100%;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">The Syntax</div>
+            <nav class="links">
+                <a href="c.html">C</a>
+                <a href="cplus.html">C++</a>
+                <a href="java.html">JAVA</a>
+                <a href="python.html">PYTHON</a>
+                <a href="csharp.html">C#</a>
+                <a href="js.html">JAVASCRIPT</a>
+                <a href="php.html">PHP</a>
+                <a href="mysql.html">MYSQL</a>
+            </nav>
+            <div class="actions">
+                <a href="#" class="log-in-link">Log In</a>
+                <a href="#" class="btn-certified">Get Certified</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="mysql-page-content">
+        
+        <!-- <section class="hero-section" style="padding-top: 50px;">
+            <a href="#tutorial-start" class="btn-start">Start the MySQL Course Now</a>
+        </section> -->
+
+        <section class="topics-section" id="tutorial-start">
+            <h2>Essential MySQL Topics (SQL)</h2>
+            <ul class="topics-list">
+                <a href="#topic-ddl"><li>DDL: Creating and Managing Tables</li></a>
+                <a href="#topic-dml"><li>DML: Inserting, Updating, and Deleting Data</li></a>
+                <a href="#topic-select"><li>Data Retrieval: SELECT Statement</li></a>
+                <a href="#topic-filtering"><li>Filtering and Sorting (WHERE, ORDER BY)</li></a>
+                <a href="#topic-joins"><li>JOINS: Combining Data from Tables</li></a>
+                <a href="#topic-aggregation"><li>Aggregation (GROUP BY, COUNT)</li></a>
+                <a href="#topic-keys"><li>Primary, Foreign Keys, and Constraints</li></a>
+                <a href="#topic-functions"><li>Built-in Functions and Subqueries</li></a>
+            </ul>
+        </section>
+
+        <hr style="border-color: rgba(255, 255, 255, 0.1); margin: 40px 0;">
+
+        <div class="tutorial-content">
+
+            <section class="topic-section" id="topic-ddl">
+                <h2>1. DDL: Creating and Managing Tables (Data Definition Language) 🏗️</h2>
+                <p>DDL statements are used to define the database schema. The most critical DDL command is <span class="highlight">CREATE TABLE</span>.</p>
+                
+                <h3>Basic Table Creation</h3>
+                <p>Tables require a name, a list of column names, and a corresponding data type for each column.</p>
+
+                <pre><code><span class="keyword">CREATE TABLE</span> Products (
+    ProductID <span class="keyword">INT</span> NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Name <span class="keyword">VARCHAR</span>(100) NOT NULL,
+    Price <span class="keyword">DECIMAL</span>(10, 2) NOT NULL,
+    StockQuantity <span class="keyword">INT</span> DEFAULT 0
+);</code></pre>
+
+                <h3>Common Data Types</h3>
+                <ul>
+                    <li><span class="highlight">INT</span>: Whole numbers.</li>
+                    <li><span class="highlight">VARCHAR(size)</span>: Variable-length string (e.g., names, titles).</li>
+                    <li><span class="highlight">DATE</span> / <span class="highlight">DATETIME</span>: Calendar date and time stamps.</li>
+                    <li><span class="highlight">DECIMAL(p, s)</span>: Exact numeric data (e.g., currency).</li>
+                </ul>
+            </section>
+
+            <section class="topic-section" id="topic-dml">
+                <h2>2. DML: Inserting, Updating, and Deleting Data (Data Manipulation Language) 📝</h2>
+                <p>DML statements are used to manage the actual data stored within the tables.</p>
+                
+                <h3>INSERT (Adding Data)</h3>
+                <pre><code><span class="keyword">INSERT INTO</span> Products (Name, Price)
+<span class="keyword">VALUES</span> ('Laptop', 1200.00),
+       ('Mouse', 25.50);</code></pre>
+                
+                <h3>UPDATE (Modifying Data)</h3>
+                <p>The <span class="highlight">WHERE</span> clause is crucial here to specify which rows to change. Omitting it will update ALL rows.</p>
+                <pre><code><span class="keyword">UPDATE</span> Products
+<span class="keyword">SET</span> StockQuantity = StockQuantity + 10
+<span class="keyword">WHERE</span> ProductID = 1;</code></pre>
+                
+                <h3>DELETE (Removing Data)</h3>
+                <p>Removes entire rows from a table. The <span class="highlight">WHERE</span> clause is essential for safety.</p>
+                <pre><code><span class="keyword">DELETE FROM</span> Products
+<span class="keyword">WHERE</span> Price < 10.00;</code></pre>
+            </section>
+
+            <section class="topic-section" id="topic-select">
+                <h2>3. Data Retrieval: SELECT Statement 🔎</h2>
+                <p>The <span class="highlight">SELECT</span> statement is the most frequently used command, used to query and retrieve data from the database.</p>
+
+                <h3>Basic Retrieval</h3>
+                <p>Use the asterisk (`*`) to select all columns, or list specific columns for efficiency.</p>
+                <pre><code><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Products; <span class="highlight">-- Selects all columns and all rows.</span>
+
+<span class="keyword">SELECT</span> Name, Price <span class="keyword">FROM</span> Products; <span class="highlight">-- Selects only Name and Price columns.</span></code></pre>
+
+                <h3>Limiting Results</h3>
+                <p>The <span class="highlight">LIMIT</span> clause restricts the number of rows returned, often used for pagination.</p>
+                <pre><code><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Products
+<span class="keyword">LIMIT</span> 10; <span class="highlight">-- Returns only the first 10 rows.</span></code></pre>
+            </section>
+
+            <section class="topic-section" id="topic-filtering">
+                <h2>4. Filtering and Sorting (WHERE, ORDER BY) 🗃️</h2>
+                <p>These clauses are used to refine the dataset returned by a <span class="highlight">SELECT</span> statement.</p>
+                
+                <h3>Filtering with WHERE</h3>
+                <p>The <span class="highlight">WHERE</span> clause applies conditions to the rows before they are returned.</p>
+                <pre><code><span class="keyword">SELECT</span> Name, Price
+<span class="keyword">FROM</span> Products
+<span class="keyword">WHERE</span> Price > 500.00 <span class="keyword">AND</span> StockQuantity > 5;</code></pre>
+
+                <h3>Sorting with ORDER BY</h3>
+                <p>The <span class="highlight">ORDER BY</span> clause sorts the result set by one or more columns, either ascending (<span class="highlight">ASC</span> - default) or descending (<span class="highlight">DESC</span>).</p>
+                <pre><code><span class="keyword">SELECT</span> Name, Price
+<span class="keyword">FROM</span> Products
+<span class="keyword">ORDER BY</span> Price <span class="keyword">DESC</span>; <span class="highlight">-- Highest price first</span></code></pre>
+            </section>
+
+            <section class="topic-section" id="topic-joins">
+                <h2>5. JOINS: Combining Data from Tables 🔗</h2>
+                <p>Since data in a relational database is spread across multiple tables, **JOINs** are used to link related data based on common column values (usually Foreign Keys).</p>
+
+                <h3>INNER JOIN (Most Common)</h3>
+                <p>Returns rows when there is a match in **both** tables.</p>
+                <pre><code><span class="keyword">SELECT</span> o.OrderID, c.Name, o.OrderDate
+<span class="keyword">FROM</span> Orders o
+<span class="keyword">INNER JOIN</span> Customers c
+<span class="keyword">ON</span> o.CustomerID = c.CustomerID;</code></pre>
+
+                <h3>LEFT JOIN</h3>
+                <p>Returns all rows from the **left** table, and the matching rows from the right table. If there is no match, the right side is <span class="highlight">NULL</span>.</p>
+            </section>
+
+            <section class="topic-section" id="topic-aggregation">
+                <h2>6. Aggregation (GROUP BY, COUNT) 📊</h2>
+                <p>Aggregate functions perform calculations on a set of rows and return a single summary value.</p>
+
+                <h3>Aggregate Functions</h3>
+                <table>
+                    <thead>
+                        <tr><th>Function</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span class="highlight">COUNT()</span></td><td>Returns the number of rows.</td></tr>
+                        <tr><td><span class="highlight">SUM()</span></td><td>Returns the total sum of a numeric column.</td></tr>
+                        <tr><td><span class="highlight">AVG()</span></td><td>Returns the average value.</td></tr>
+                        <tr><td><span class="highlight">MAX()</span>/ <span class="highlight">MIN()</span></td><td>Returns the largest/smallest value.</td></tr>
+                    </tbody>
+                </table>
+                
+                <h3>Grouping with GROUP BY</h3>
+                <p>The <span class="highlight">GROUP BY</span> clause groups rows that have the same values in specified columns into summary rows.</p>
+                <pre><code><span class="keyword">SELECT</span> Category, <span class="keyword">COUNT</span>(ProductID) <span class="keyword">AS</span> TotalProducts
+<span class="keyword">FROM</span> Products
+<span class="keyword">GROUP BY</span> Category;</code></pre>
+
+                <h3>Filtering Groups with HAVING</h3>
+                <p><span class="highlight">HAVING</span> is used to filter groups based on aggregate results (where <span class="highlight">WHERE</span> cannot be used).</p>
+                <pre><code><span class="keyword">SELECT</span> Category, <span class="keyword">AVG</span>(Price)
+<span class="keyword">FROM</span> Products
+<span class="keyword">GROUP BY</span> Category
+<span class="keyword">HAVING</span> <span class="keyword">AVG</span>(Price) > 100.00;</code></pre>
+            </section>
+
+            <section class="topic-section" id="topic-keys">
+                <h2>7. Primary, Foreign Keys, and Constraints 🔑</h2>
+                <p>Constraints enforce the integrity of the data in the database.</p>
+
+                <h3>Primary Key (PK)</h3>
+                <p>A column (or set of columns) that uniquely identifies each row in a table. Must be <span class="highlight">NOT NULL</span> and unique.</p>
+
+                <h3>Foreign Key (FK)</h3>
+                <p>A field in one table that refers to the **Primary Key** in another table. It creates a link between the two tables, enforcing **referential integrity**.</p>
+
+                <pre><code><span class="keyword">CREATE TABLE</span> Orders (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE,
+    CustomerID INT,
+    <span class="keyword">FOREIGN KEY</span> (CustomerID)
+        <span class="keyword">REFERENCES</span> Customers(CustomerID)
+);</code></pre>
+                <div class="diagram-placeholder">
+                    
+                </div>
+            </section>
+
+            <section class="topic-section" id="topic-functions">
+                <h2>8. Built-in Functions and Subqueries 🧠</h2>
+                <p>MySQL provides a vast library of functions for manipulating data types.</p>
+
+                <h3>Scalar Functions (Per Row)</h3>
+                <ul>
+                    <li><span class="highlight">UPPER(), LOWER()</span>: Converts strings to case.</li>
+                    <li><span class="highlight">CONCAT()</span>: Joins two or more strings.</li>
+                    <li><span class="highlight">DATE_FORMAT()</span>: Formats date values.</li>
+                </ul>
+
+                <h3>Subqueries</h3>
+                <p>A <span class="highlight">Subquery</span> is a <span class="highlight">SELECT</span> statement nested inside another SQL statement. They are often used to dynamically provide data for the main query's <span class="highlight">WHERE</span> clause.</p>
+                <pre><code><span class="keyword">SELECT</span> Name, Price
+<span class="keyword">FROM</span> Products
+<span class="keyword">WHERE</span> Price > (
+    <span class="keyword">SELECT</span> <span class="keyword">AVG</span>(Price) <span class="keyword">FROM</span> Products
+); <span class="highlight">-- Finds products more expensive than the average.</span></code></pre>
+            </section>
+
+        </div>
+        
+    </main>
+
+    <div class="footer-wave"></div> 
+
+</body>
+</html>

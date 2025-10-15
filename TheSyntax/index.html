@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Syntax | Learn to Code</title>
+    <link href="style.css" rel="stylesheet">
+   
+</head>
+<body>
+
+    <!-- 1. NAVBAR (Top Bar) -->
+    <header class="navbar">
+        <div class="navbar-content container">
+            <a href="#" class="logo">The Syntax</a>
+            <div class="action-buttons">
+                <a href="login.html" class="btn-login">Log In</a>
+                <a href="signup.html" class="btn-signup">Get Certified</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. OPTIONS SECTION (Secondary Nav) -->
+    <nav class="options-section">
+        <ul class="options-list">
+            <li><a href="c.html">C</a></li>
+            <li><a href="cplus.html">C++</a></li>
+            <li><a href="java.html">JAVA</a></li>
+            <li><a href="python.html">PYTHON</a></li>
+            <li><a href="csharp.html">C#</a></li>
+            <li><a href="js.html">JAVASCRIPT</a></li>
+            <li><a href="php.html">PHP</a></li>
+            <li><a href="mysql.html">MySQL</a></li>
+        </ul>
+    </nav>
+
+    <!-- 3. SEARCH SECTION (Hero) -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Learn Programming</h1>
+            <p class="hero-subtitle">
+                with
+                <br/>
+                <br/>
+            <b>THE SYNTAX</b>
+            </p>
+            
+            <form class="search-form" onsubmit="handleSearch(event)">
+                <input 
+                    type="search" 
+                    id="search-input"
+                    placeholder="What do you want to learn today?" 
+                    class="search-input"
+                />
+                <button type="submit" class="search-button" aria-label="Search">
+                    <svg class="search-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </button>
+            </form>
+
+            <p style="margin-top: 25px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                Decode. Learn. Create.
+            </p>
+        </div>
+    </section>
+
+    <!-- Diagonal Separator Structure -->
+    <div class="diagonal-separator-wrapper">
+        <div class="diagonal-separator"></div>
+    </div>
+    
+    <!-- Placeholder Content Area Below Hero -->
+    <section class="content-section">
+        <div class="container" style="max-width: 900px; padding-top: 50px;">
+            <h2 align="center"style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">C Fundamentals</h2>
+            <p style="font-size: 1.2rem; text-align: center;">
+                    C is a powerful, general-purpose programming language developed by Dennis Ritchie in 1972.<br/>
+It is the foundation of many modern languages like C++, Java, and Python.
+Known for its speed, efficiency, and low-level access, C is widely used in system programming, operating systems, and embedded systems.
+Learning C builds a strong understanding of how computers work at the hardware and memory level.
+            </p>
+        </div>
+        <div class="c-syntax">
+            <h2>Say Hello to the world using C:</h2>
+            <div class="main-syntax">
+                <pre><code>
+
+#include ⟨stdio.h⟩
+
+int main() {
+    printf("Hello World!\n");
+    return 0;
+}
+
+
+
+Output: Hello World!
+</code></pre>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section1">
+        <div class="container1" style="max-width: 900px; padding-top: 50px;">
+            <h2 align="center"style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">C++ Fundamentals</h2>
+            <p style="font-size: 1.2rem;text-align: center;">
+                C++ is an extension of the C language that introduces object-oriented programming concepts like classes and inheritance.<br/>
+It combines speed and low-level control with modularity and reusability.
+C++ is widely used in game development, operating systems, and real-time simulations.<br/>
+It helps developers write efficient, scalable, and performance-critical applications.
+            </p>
+        </div>
+        <div class="cplus-syntax">
+            <h2>Say Hello to the world using C++:</h2>
+            <div class="main-syntax1">
+                <pre><code>
+#include ⟨iostream⟩
+using namespace std;
+
+int main() {
+    cout << "Hello World!" << endl;
+    return 0;
+}
+
+
+
+Output: Hello World!
+</code></pre>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section2">
+        <div class="container2" style="max-width: 900px; padding-top: 50px;">
+            <h2 align="center"style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">Java Fundamentals</h2>
+            <p style="font-size: 1.2rem;text-align: center;">
+                Java is a platform-independent, object-oriented programming language developed by Sun Microsystems in 1995.<br/>
+Its motto, “Write once, run anywhere,” makes it ideal for cross-platform applications.
+Java is used for Android apps, enterprise software, and web development.
+It emphasizes security, reliability, and scalability, making it a top choice for large systems.
+            </p>
+        </div>
+        <div class="java-syntax">
+            <h2>Say Hello to the world using Java:</h2>
+            <div class="main-syntax2">
+                <pre><code>
+public class HelloWorld {
+  public static void main(String[] 
+  args)
+    {
+        System.out.println("Hello 
+        World!");
+    }
+}
+
+
+Output: Hello World!
+</code></pre>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section3">
+        <div class="container3" style="max-width: 900px; padding-top: 50px;">
+            <h2 align="center"style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">Python Fundamentals</h2>
+            <p style="font-size: 1.2rem;text-align: center;">
+                Python is a high-level, interpreted language known for its simplicity and readability.<br/>
+It supports multiple paradigms — procedural, object-oriented, and functional programming.
+Python is used in web development, data science, AI, machine learning, and automation.
+Its vast libraries and easy syntax make it perfect for both beginners and professionals.
+            </p>
+        </div>
+        <div class="python-syntax">
+            <h2>Say Hello to the world using Python:</h2>
+            <div class="main-syntax3">
+                <pre><code>
+# Python program to print 
+Hello World and take input
+
+name = input("Enter your name: ")
+print("Hello " + name + "!")
+
+
+
+
+Output: Hello World!
+</code></pre>
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        // Placeholder JavaScript for handling the search form
+        function handleSearch(event) {
+            event.preventDefault(); // Stop the form from submitting normally
+            const input = document.getElementById('search-input').value.trim();
+            if (input) {
+                console.log(`Searching for: ${input}`);
+                // In a real application, you would redirect the user or filter content here.
+            }
+        }
+    </script>
+    <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col about">
+            <h3>The Syntax</h3>
+            <p>Decode. Learn. Create.</p>
+            <p>&copy; 2025 The Syntax. All Rights Reserved.</p>
+        </div>
+
+        <div class="footer-col links">
+            <h4>Resources</h4>
+            <ul>
+                <li><a href="#">Tutorials</a></li>
+                <li><a href="#">References</a></li>
+                <li><a href="#">Quizzes</a></li>
+                <li><a href="#">Code Editor</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col links">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#">Get Certified</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col social">
+            <h4>Connect</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="Instagram">📸</a>
+            </div>
+            <p class="contact-email">support@thesyntax.com</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
