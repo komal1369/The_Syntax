@@ -404,3 +404,86 @@
         margin-bottom: 20px;
     }
 }
+/* Responsive adjustments for content sections */
+@media (max-width: 900px) {
+    /* STACKING: Change the content sections from horizontal (row) to vertical (column) layout */
+    .content-section, 
+    .content-section1, 
+    .content-section2,
+    .content-section3 {
+        flex-direction: column;
+        align-items: center; /* Center everything when stacked */
+        padding: 40px 15px; /* Adjust vertical padding */
+    }
+
+    /* TEXT CONTAINER ADJUSTMENTS: Remove side margin and center text */
+    .content-section .container,
+    .content-section1 .container1,
+    .content-section2 .container2,
+    .content-section3 .container3 {
+        margin-right: 0; /* Remove the horizontal spacing */
+        margin-bottom: 30px; /* Add vertical spacing between text and code */
+        text-align: center;
+        max-width: 90%; /* Allow the text to take up most of the screen width */
+    }
+
+    /* CODE BLOCK ADJUSTMENTS: Ensure code block is centered and takes up most width */
+    .c-syntax {
+        max-width: 90%; 
+        width: auto; /* Allow width to be determined by max-width */
+    }
+}
+/* Responsive adjustments for Navbar and Options */
+@media (max-width: 600px) {
+    /* NAV BAR */
+    .navbar-content {
+        flex-direction: column; /* Stack logo and buttons */
+        gap: 10px;
+        padding-top: 10px;
+    }
+    .logo {
+        margin-bottom: 5px;
+    }
+    
+    /* OPTIONS SECTION */
+    .options-section {
+        padding: 0 5px; /* Less horizontal padding */
+    }
+    .options-list li {
+        padding: 8px 10px;
+    }
+    .options-list a {
+        font-size: 0.75rem; /* Smaller font for secondary nav */
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+        padding: 50px 0 100px 0;
+    }
+    .hero-title {
+        font-size: 3rem; 
+    }
+    .search-form {
+        max-width: 90%; /* Ensure search bar fits small screens */
+    }
+
+    /* FOOTER */
+    .footer-container {
+        flex-direction: column; /* Stack footer columns */
+        text-align: center;
+    }
+    .footer-col {
+        margin-bottom: 25px;
+        min-width: 100%;
+    }
+    .footer-col h3, .footer-col h4 {
+        text-align: center;
+    }
+    .footer-col ul {
+        display: none; /* Hide extensive link lists for simplicity on mobile */
+    }
+    .social-icons {
+        justify-content: center;
+        display: flex;
+    }
+}
